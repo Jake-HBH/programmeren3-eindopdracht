@@ -8,6 +8,10 @@ if (!isset($_GET['id'])) {
 } else {
     $data = getSkateboardDetails($_GET['id']);
 }
+
+//header("Content-Type: application/json");
+//echo json_encode($data);
+//exit;
 ?>
 
 <!DOCTYPE html>
@@ -21,31 +25,26 @@ if (!isset($_GET['id'])) {
 </head>
 <body>
 <header>
-    <h1>Skateboard Magazine</h1>
+    <h1 class="main-title">Skateboard Magazine</h1>
 </header>
-<section class="section">
-    <div class="container">
-        <h1 class="title">Skateboard Magazine</h1>
-        <div class="columns is-multiline">
+<section>
+    <div>
+        <section id="skateboard-gallery">
             <?php foreach ($data as $skateboard): ?>
-                <div class="column is-4">
-                    <div class="skateboard-card">
-                        <div class="card-image">
-                            <figure class="image is-4by3">
-                                <img src="<?php echo $skateboard['image']; ?>" alt="<?php echo $skateboard['name']; ?>">
-                            </figure>
-                        </div>
-                        <div class="card-content">
-                            <div class="content">
-                                <h2 class="title is-4"><?php echo $skateboard['name']; ?></h2>
-                                <p><?php echo $skateboard['detailedName']; ?></p>
-                            </div>
+                <div>
+                    <div class="skateboard-card"
+                    <figure>
+                        <img src="<?php echo $skateboard['image']; ?>" alt="<?php echo $skateboard['name']; ?>">
+                    </figure>
+                    <div>
+                        <div>
+                            <h2 class="title is-4"><?php echo $skateboard['name']; ?></h2>
+                            <p><?php echo $skateboard['detailedName']; ?></p>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
     </div>
+    <?php endforeach; ?>
 </section>
 </body>
 </html>

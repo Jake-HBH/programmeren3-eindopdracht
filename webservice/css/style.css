@@ -23,7 +23,6 @@ h1.main-title {
 h2 {
     background-color: white;
     padding: 4px;
-    text-transform: capitalize;
     color: rgba(14, 14, 42, 0.7);
 }
 
@@ -35,7 +34,7 @@ h2 span {
     border-radius: 12px;
 }
 
-#pokemon-gallery {
+#skateboard-gallery {
     max-width: 1200px;
     margin: 0 auto 1rem;
     display: grid;
@@ -44,7 +43,7 @@ h2 span {
     justify-items: center;
 }
 
-#pokemon-gallery.dialog-open {
+#skateboard-gallery.dialog-open {
     filter: blur(10px);
 }
 
