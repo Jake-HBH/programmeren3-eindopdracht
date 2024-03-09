@@ -50,7 +50,7 @@ function getSkateboards()
         [
             "id" => 8,
             "name" => "Zero",
-            "detailedName" => "Bold 7.75\" Complete",
+            "detailedName" => "Bold 7.75\" Medium Complete",
             "image" => "images/zero.jpg"
         ],
         [
