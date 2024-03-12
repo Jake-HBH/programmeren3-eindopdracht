@@ -8,7 +8,7 @@ function getSkateboards()
         [
             "id" => 1,
             "name" => "Santa Cruz",
-            "detailedName" => "Screaming Hand Full 8.0\" Complete",
+            "detailedName" => "Screaming Hand 8.0\" Complete",
             "image" => "images/santacruz.jpg"
         ],
         [
@@ -32,7 +32,7 @@ function getSkateboards()
         [
             "id" => 5,
             "name" => "Globe",
-            "detailedName" => "G1 Digital Nurture 8.0\" Complete",
+            "detailedName" => "G1 Digital 8.0\" Complete",
             "image" => "images/globe.jpg"
         ],
         [
