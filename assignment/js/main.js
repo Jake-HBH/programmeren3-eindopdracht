@@ -5,6 +5,7 @@ let url = 'http://localhost/programmeren3-eindopdracht/assignment/webservice/ind
 let gallery;
 let detailModal;
 let detailContent;
+let favorites = JSON.parse(localStorage.getItem('favoriteSkateboard')) || [];
 
 /**
  * Initialize after the DOM is ready
@@ -41,50 +42,64 @@ function ajaxRequestSkateboards(url, successHandler) {
 
 function createSkateboardCards(data) {
     // Loop through fetched skateboard data and create cards
-    for (const skateboard of data){
+    for (const skateboardData of data){
         const skateboardCard = document.createElement('div');
         skateboardCard.classList.add('skateboardCard');
-        skateboardCard.dataset.id = skateboard.id;
+        skateboardCard.dataset.id = skateboardData.id;
         // Append skateboard card to the magazine
         gallery.appendChild(skateboardCard);
         // Fill skateboard card with details
-        fillSkateboardCard(skateboard, skateboardCard);
+        fillSkateboardCard(skateboardData, skateboardCard);
 
     }
     console.log(data)
 }
 
-function fillSkateboardCard(skateboard, skateboardCard, getSkateboardDetails) {
+function fillSkateboardCard(skateboardData, skateboardCard, data) {
 
     // Element for the image of the skateboard
     const image = document.createElement('img');
-    image.src = skateboard.image;
+    image.src = skateboardData.image;
     skateboardCard.appendChild(image);
 
     // Element for the name of the skateboard
     const skateboardTitle = document.createElement('h2');
-    skateboardTitle.innerHTML = skateboard.name;
+    skateboardTitle.innerHTML = skateboardData.name;
     skateboardCard.appendChild(skateboardTitle);
 
     // Element for the name of the skateboard
     const skateboardDetailedName = document.createElement('p');
-    skateboardDetailedName.innerHTML = skateboard.detailedName;
+    skateboardDetailedName.innerHTML = skateboardData.detailedName;
     skateboardCard.appendChild(skateboardDetailedName);
 
     // Element for the button of the skateboard
     const detailButton = document.createElement('button');
     detailButton.innerHTML = "View Details";
-    detailButton.dataset.id = skateboard.id;
+    detailButton.dataset.id = skateboardData.id;
     skateboardCard.appendChild(detailButton);
 
     // Element for the button of the skateboard
-    const favoriteButton = document.createElement('button');
-    favoriteButton.innerHTML = "Add to favorites";
-    favoriteButton.dataset.id = skateboard.id;
+    let favoriteButton = document.createElement('button');
+    favoriteButton.innerText = "Add to favorites";
+    favoriteButton.classList.add('favoriteButton');
+
     skateboardCard.appendChild(favoriteButton);
+    if (favorites.includes(skateboardData.name)) {
+        skateboardCard.classList.add('favoriteSkateboard')
+    }
+    favoriteButton.addEventListener('click', () => {
+        if (skateboardCard.classList.contains('favoriteSkateboard')) {
+            skateboardCard.classList.remove('favoriteSkateboard');
+            deleteFromFavorites(skateboardData.name);
+        } else {
+            skateboardCard.classList.add('favoriteSkateboard');
+            addToFavorites(skateboardData.name);
+        }
+        updateFavoriteButtonText(favoriteButton, skateboardData.name);
+    });
 
-
-
+    updateFavoriteButtonText(favoriteButton, skateboardData.name);
+    skateboardData[skateboardData.id] = skateboardData
 }
 
 function skateboardClickHandler(e) {
@@ -128,7 +143,7 @@ function fillSkateboardModal(getSkateboardDetails) {
 
     // Element for the price of the skateboard
     const price = document.createElement('p');
-    price.innerHTML = `Prijs: ${getSkateboardDetails.price}`; // Check if this property exists
+    price.innerHTML = `Prijs: ${getSkateboardDetails.price}`;
     detailContent.appendChild(price);
 }
 
@@ -150,4 +165,23 @@ function ajaxErrorHandler(data) {
     error.classList.add('error');
     error.innerHTML = "Er is helaas iets fout gegaan met de API, probeer het later opnieuw";
     gallery.before(error);
+}
+
+function addToFavorites(skateboardTitle){
+        favorites.push(skateboardTitle)
+        localStorage.setItem('favoriteSkateboard', JSON.stringify(favorites))
+}
+
+function deleteFromFavorites(skateboardTitle){
+    const itemIndex = favorites.indexOf(skateboardTitle);
+    favorites.splice(itemIndex, 1)
+    localStorage.setItem('favoriteSkateboard', JSON.stringify(favorites))
+}
+
+function updateFavoriteButtonText(favoriteButton, skateboardTitle){
+    if (favorites.includes(skateboardTitle)){
+        favoriteButton.textContent = 'Remove from favorites'
+    } else  {
+        favoriteButton.textContent = 'Add to favorites'
+    }
 }
