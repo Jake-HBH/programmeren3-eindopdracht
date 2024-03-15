@@ -5,7 +5,7 @@ let url = 'http://localhost/programmeren3-eindopdracht/assignment/webservice/ind
 let gallery;
 let detailModal;
 let detailContent;
-let favorites = JSON.parse(localStorage.getItem('favoriteSkateboard')) || [];
+let favorites = JSON.parse(localStorage.getItem('favoriteSkateboard'));
 
 /**
  * Initialize after the DOM is ready
@@ -30,7 +30,7 @@ function ajaxRequestSkateboards(url, successHandler) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`HTTP error (${response.statusText}): ${response.statusText}`);
             }
             return response.json();
         })
@@ -42,6 +42,7 @@ function ajaxRequestSkateboards(url, successHandler) {
 
 function createSkateboardCards(data) {
     // Loop through fetched skateboard data and create cards
+    //voor elke skateboard wordt er data toegevoegd en de class skateboardCard toegevoegd
     for (const skateboardData of data){
         const skateboardCard = document.createElement('div');
         skateboardCard.classList.add('skateboardCard');
@@ -55,7 +56,7 @@ function createSkateboardCards(data) {
     console.log(data)
 }
 
-function fillSkateboardCard(skateboardData, skateboardCard, data) {
+function fillSkateboardCard(skateboardData, skateboardCard) {
 
     // Element for the image of the skateboard
     const image = document.createElement('img');
@@ -80,7 +81,7 @@ function fillSkateboardCard(skateboardData, skateboardCard, data) {
 
     // Element for the button of the skateboard
     let favoriteButton = document.createElement('button');
-    favoriteButton.innerText = "Add to favorites";
+    favoriteButton.innerHTML = "Add to favorites";
     favoriteButton.classList.add('favoriteButton');
 
     skateboardCard.appendChild(favoriteButton);
@@ -99,7 +100,7 @@ function fillSkateboardCard(skateboardData, skateboardCard, data) {
     });
 
     updateFavoriteButtonText(favoriteButton, skateboardData.name);
-    skateboardData[skateboardData.id] = skateboardData
+    skateboardData[skateboardCard.id] = skateboardCard
 }
 
 function skateboardClickHandler(e) {
@@ -114,14 +115,14 @@ function skateboardClickHandler(e) {
     fetch(`webservice/index.php?id=${skateboardData}`)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error(`HTTP error (${response.statusText}): ${response.statusText}`);
             }
             return response.json();
         })
+        //Give error if error with url
+
         .then(fillSkateboardModal)
-        .catch(error => {
-            console.error('Error fetching skateboard details:', error);
-        });
+        .catch(ajaxErrorHandler);
     detailModal.showModal();
     gallery.classList.add('dialog-open')
 }

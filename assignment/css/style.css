@@ -102,15 +102,15 @@ h2 span {
     background-color: cadetblue;
 }
 
-/*.favoriteButton{*/
-/*    background-color: grey;*/
-/*}*/
+.favoriteButton{
+    background-color: grey;
+}
 
 .favoriteSkateboard{
-        animation: fadeInAnimation ease 3s;
+        animation: fadeInAnimation ease 1s;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
-        background-color: #bfffff;
+        background-color: #688181;
 }
 
 @keyframes fadeInAnimation {
@@ -129,8 +129,6 @@ h2 span {
 }
 
 .modal {
-    opacity: 0;
-    transition: all 0.7s ease;
     display: flex;
     align-items: flex-start;
     justify-content: center;
