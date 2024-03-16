@@ -112,21 +112,24 @@ function skateboardClickHandler(e) {
         return;
     }
 
-    const skateboardData = clickedItem.dataset.id;
+    // Check if the clicked button is not a favorite button
+    if (!clickedItem.classList.contains('favoriteSkateboard')) {
+        const skateboardData = clickedItem.dataset.id;
 
-    fetch(`webservice/index.php?id=${skateboardData}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error (${response.statusText}): ${response.statusText}`);
-            }
-            return response.json();
-        })
-        //Give error if error with url
-        .then(fillSkateboardModal)
-        .catch(ajaxErrorHandler);
-    detailModal.showModal();
-    gallery.classList.add('dialog-open')
+        fetch(`webservice/index.php?id=${skateboardData}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error (${response.statusText}): ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(fillSkateboardModal)
+            .catch(ajaxErrorHandler);
+        detailModal.showModal();
+        gallery.classList.add('dialog-open');
+    }
 }
+
 
 function fillSkateboardModal(getSkateboardDetails) {
 
