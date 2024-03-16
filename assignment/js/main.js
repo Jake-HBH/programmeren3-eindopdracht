@@ -80,7 +80,7 @@ function fillSkateboardCard(skateboardData, skateboardCard) {
     skateboardCard.appendChild(detailButton);
 
     // Element for the button of the skateboard
-    let favoriteButton = document.createElement('button');
+    const favoriteButton = document.createElement('button');
     favoriteButton.innerHTML = "Add to favorites";
     favoriteButton.classList.add('favoriteSkateboard');
 
@@ -138,7 +138,7 @@ function fillSkateboardModal(getSkateboardDetails) {
 
     // Element for the name of the skateboard
     const skateboardTitle = document.createElement('h1');
-    skateboardTitle.innerHTML = getSkateboardDetails.detailedName;
+    skateboardTitle.innerHTML = 'Details';
     detailContent.appendChild(skateboardTitle);
 
     // Element for the details of the skateboard
