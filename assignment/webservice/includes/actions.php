@@ -9,63 +9,62 @@ function getSkateboards()
             "id" => 1,
             "name" => "Santa Cruz",
             "detailedName" => "Screaming Hand 8.0\" Complete",
-            "image" => "images/santacruz.jpg"
+            "image" => "images/santacruz.jpg",
         ],
         [
             "id" => 2,
             "name" => "Enjoi",
             "detailedName" => "Whitey Panda FP 7.75\" Complete",
-            "image" => "images/enjoi.jpg"
+            "image" => "images/enjoi.jpg",
         ],
         [
             "id" => 3,
             "name" => "Toy Machine",
             "detailedName" => "Vice Monster 7.75\" Complete",
-            "image" => "images/toymachine.jpg"
+            "image" => "images/toymachine.jpg",
         ],
         [
             "id" => 4,
             "name" => "Plan B",
             "detailedName" => "Bumble Black 7.75\" Complete",
-            "image" => "images/planb.jpg"
+            "image" => "images/planb.jpg",
         ],
         [
             "id" => 5,
             "name" => "Globe",
             "detailedName" => "G1 Digital 8.0\" Complete",
-            "image" => "images/globe.jpg"
+            "image" => "images/globe.jpg",
         ],
         [
             "id" => 6,
             "name" => "Girl",
             "detailedName" => "Bannerot Yin Yang 8\" Complete",
-            "image" => "images/girl.jpg"
+            "image" => "images/girl.jpg",
         ],
         [
             "id" => 7,
             "name" => "Blueprint",
             "detailedName" => "Home Heart 8.125\" Complete",
-            "image" => "images/blueprint.jpg"
+            "image" => "images/blueprint.jpg",
         ],
         [
             "id" => 8,
             "name" => "Zero",
             "detailedName" => "Bold 7.75\" Medium Complete",
-            "image" => "images/zero.jpg"
+            "image" => "images/zero.jpg",
         ],
         [
             "id" => 9,
             "name" => "Creature",
             "detailedName" => "The Thing Micro 7.5\" Complete",
-            "image" => "images/creature.jpg"
+            "image" => "images/creature.jpg",
         ],
         [
             "id" => 10,
             "name" => "Element",
             "detailedName" => "Out There 7.75\" Complete",
-            "image" => "images/element.jpg"
+            "image" => "images/element.jpg",
         ]
-
     ];
 }
 

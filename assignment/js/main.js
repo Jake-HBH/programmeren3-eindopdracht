@@ -5,7 +5,7 @@ let url = 'http://localhost/programmeren3-eindopdracht/assignment/webservice/ind
 let gallery;
 let detailModal;
 let detailContent;
-let favorites = JSON.parse(localStorage.getItem('favoriteSkateboard'));
+let favorites = JSON.parse(localStorage.getItem('favoriteSkateboard')) || [];
 
 /**
  * Initialize after the DOM is ready
@@ -23,6 +23,7 @@ function init() {
 
     // Start the application by loading skateboard data
     ajaxRequestSkateboards(url, createSkateboardCards);
+
 }
 
 function ajaxRequestSkateboards(url, successHandler) {
@@ -82,9 +83,11 @@ function fillSkateboardCard(skateboardData, skateboardCard) {
     // Element for the button of the skateboard
     let favoriteButton = document.createElement('button');
     favoriteButton.innerHTML = "Add to favorites";
-    favoriteButton.classList.add('favoriteButton');
+    favoriteButton.classList.add('favoriteSkateboard');
+
 
     skateboardCard.appendChild(favoriteButton);
+
     if (favorites.includes(skateboardData.name)) {
         skateboardCard.classList.add('favoriteSkateboard')
     }
@@ -98,7 +101,7 @@ function fillSkateboardCard(skateboardData, skateboardCard) {
         }
         updateFavoriteButtonText(favoriteButton, skateboardData.name);
     });
-
+    favoriteButton.dataset.id = skateboardData.id;
     updateFavoriteButtonText(favoriteButton, skateboardData.name);
     skateboardData[skateboardCard.id] = skateboardCard
 }
@@ -120,7 +123,6 @@ function skateboardClickHandler(e) {
             return response.json();
         })
         //Give error if error with url
-
         .then(fillSkateboardModal)
         .catch(ajaxErrorHandler);
     detailModal.showModal();
@@ -150,10 +152,12 @@ function fillSkateboardModal(getSkateboardDetails) {
 
 
 function detailModalClickHandler(e) {
+    console.log(e.target.nodeName); // Log the clicked element
     if (e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
         detailModal.close();
     }
 }
+
 
 function dialogCloseHandler() {
     // Close modal
@@ -170,7 +174,7 @@ function ajaxErrorHandler(data) {
 
 function addToFavorites(skateboardTitle){
         favorites.push(skateboardTitle)
-        localStorage.setItem('favoriteSkateboard', JSON.stringify(favorites))
+        localStorage.setItem('favoriteSkateboard', JSON.stringify(favorites));
 }
 
 function deleteFromFavorites(skateboardTitle){
@@ -179,10 +183,10 @@ function deleteFromFavorites(skateboardTitle){
     localStorage.setItem('favoriteSkateboard', JSON.stringify(favorites))
 }
 
-function updateFavoriteButtonText(favoriteButton, skateboardTitle){
-    if (favorites.includes(skateboardTitle)){
+function updateFavoriteButtonText(favoriteButton, skateboardTitle) {
+    if (favorites.includes(skateboardTitle)) {
         favoriteButton.textContent = 'Remove from favorites'
-    } else  {
+    } else {
         favoriteButton.textContent = 'Add to favorites'
     }
 }
