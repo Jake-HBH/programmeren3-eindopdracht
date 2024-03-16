@@ -23,7 +23,6 @@ function init() {
 
     // Start the application by loading skateboard data
     ajaxRequestSkateboards(url, createSkateboardCards);
-
 }
 
 function ajaxRequestSkateboards(url, successHandler) {
@@ -152,7 +151,9 @@ function fillSkateboardModal(getSkateboardDetails) {
 
 
 function detailModalClickHandler(e) {
+    detailContent.innerHTML = '';
     console.log(e.target.nodeName); // Log the clicked element
+
     if (e.target.nodeName === 'DIALOG' || e.target.nodeName === 'BUTTON') {
         detailModal.close();
     }
@@ -161,7 +162,7 @@ function detailModalClickHandler(e) {
 
 function dialogCloseHandler() {
     // Close modal
-    gallery.classList.remove('dialog-open');
+    detailModal.classList.remove('dialog-open');
 }
 
 function ajaxErrorHandler(data) {
