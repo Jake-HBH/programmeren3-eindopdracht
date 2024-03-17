@@ -18,7 +18,7 @@ function init() {
     // Retrieve modal element
     detailModal = document.getElementById('skateboardDetail');
     detailModal.addEventListener('click', detailModalClickHandler);
-    detailModal.addEventListener('close', dialogCloseHandler);
+    detailModal.addEventListener('close', modalCloseHandler);
     detailContent = document.querySelector('.modal-content');
 
     // Start the application by loading skateboard data
@@ -42,9 +42,9 @@ function ajaxRequestSkateboards(url, successHandler) {
 
 function createSkateboardCards(data) {
     // Loop through fetched skateboard data and create cards
-    //voor elke skateboard wordt er data toegevoegd en de class skateboardCard toegevoegd
     for (const skateboardData of data){
         const skateboardCard = document.createElement('div');
+        //voor elke skateboard wordt er data toegevoegd en de class skateboardCard toegevoegd
         skateboardCard.classList.add('skateboardCard');
         skateboardCard.dataset.id = skateboardData.id;
         // Append skateboard card to the magazine
@@ -163,7 +163,7 @@ function detailModalClickHandler(e) {
 }
 
 
-function dialogCloseHandler() {
+function modalCloseHandler() {
     // Close modal
     detailModal.classList.remove('dialog-open');
 }
@@ -174,6 +174,8 @@ function ajaxErrorHandler(data) {
     error.classList.add('error');
     error.innerHTML = "Er is helaas iets fout gegaan met de API, probeer het later opnieuw";
     gallery.before(error);
+
+
 }
 
 function addToFavorites(skateboardTitle){
